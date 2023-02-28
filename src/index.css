@@ -4,8 +4,8 @@
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
   background-color: #242424;
-  --primary-color:#3700B3;
-  --secondary-color:#03DAC6;
+  --primary-color: #3700b3;
+  --secondary-color: #03dac6;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -15,7 +15,7 @@
   --primary-transition: all 250ms ease-in-out;
 }
 
-*{
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
