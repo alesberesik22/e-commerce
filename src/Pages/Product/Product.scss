@@ -4,6 +4,7 @@
   justify-content: space-between;
   flex-direction: row;
   width: 100%;
+  position: relative;
   .product_images {
     width: 50%;
     display: flex;
@@ -64,8 +65,8 @@
       flex-direction: row;
       gap: 1rem;
       .product_content_number_change {
-        width: 30px;
-        height: 30px;
+        width: 40px;
+        height: 40px;
         background-color: rgba(128, 128, 128, 0.473);
         display: flex;
         align-items: center;
@@ -120,6 +121,29 @@
         &:hover {
           color: var(--secondary-color);
         }
+      }
+    }
+    .info {
+      width: 100%;
+      display: flex;
+      align-items: flex-start;
+      justify-content: flex-start;
+      flex-direction: column;
+      span {
+        padding: 5px 0;
+      }
+    }
+    .details {
+      width: 100%;
+      display: flex;
+      align-items: flex-start;
+      justify-content: flex-start;
+      flex-direction: column;
+      span {
+        padding: 5px 0;
+      }
+      hr {
+        width: 30%;
       }
     }
   }

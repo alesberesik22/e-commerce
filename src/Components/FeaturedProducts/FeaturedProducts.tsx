@@ -1,50 +1,26 @@
 import React from "react";
 import "./FeaturedProducts.scss";
 import Card from "./Card/Card";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { IProducts } from "../../api/types";
+import useFetch from "../../api/hooks/useFetch";
 
-const FeaturedProducts = () => {
-  const data = [
-    {
-      id: 1,
-      img: "https://picsum.photos/250/400",
-      img2: "https://images.pexels.com/photos/4041268/pexels-photo-4041268.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-      title: "T-shirt",
-      isNew: true,
-      oldPrice: 19,
-      price: 12,
-    },
-    {
-      id: 2,
-      img: "https://picsum.photos/250/400",
-      img2: "https://images.pexels.com/photos/4041268/pexels-photo-4041268.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-      title: "Coat",
-      isNew: false,
-      oldPrice: 19,
-      price: 12,
-    },
-    {
-      id: 3,
-      img: "https://picsum.photos/250/400",
-      img2: "https://images.pexels.com/photos/4041268/pexels-photo-4041268.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-      title: "Coat",
-      isNew: true,
-      oldPrice: 19,
-      price: 12,
-    },
-    {
-      id: 4,
-      img: "https://picsum.photos/250/400",
-      img2: "https://images.pexels.com/photos/4041268/pexels-photo-4041268.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-      title: "Coat",
-      isNew: false,
-      oldPrice: 19,
-      price: 12,
-    },
-  ];
+interface Props {
+  type: string;
+}
+
+const FeaturedProducts: React.FC<Props> = ({ type }) => {
+  console.log(type);
+  const queryClient = useQueryClient();
+  const { fetchData, fetchError, loading } = useFetch(
+    `/products?populate=*&[filters][type][$eq]=${type}`
+  );
+  console.log(fetchData);
+
   return (
     <div className={"featured_products"}>
       <div className={"featured_products_header"}>
-        <h3>Trending Products</h3>
+        <h3>{type} Products</h3>
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam a
           iaculis elit, nec venenatis mi. Donec lacinia finibus dolor sed
@@ -58,9 +34,8 @@ const FeaturedProducts = () => {
         </p>
       </div>
       <div className={"featured_products_content"}>
-        {data.map((item) => (
-          <Card data={item} key={item.id} />
-        ))}
+        {fetchData &&
+          fetchData?.map((item) => <Card data={item} key={item.id} />)}
       </div>
     </div>
   );

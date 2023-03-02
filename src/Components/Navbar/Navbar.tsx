@@ -7,9 +7,11 @@ import Person2OutlinedIcon from "@mui/icons-material/Person2Outlined";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import { Link } from "react-router-dom";
+import Cart from "../Cart/Cart";
 
 const Navbar = () => {
   const [scrollPosition, setScrollPosition] = useState(0);
+  const [openCart, setOpenCart] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -77,12 +79,16 @@ const Navbar = () => {
           <SearchIcon />
           <Person2OutlinedIcon />
           <FavoriteBorderOutlinedIcon />
-          <div className={"navbar_icon_cart"}>
+          <div
+            className={"navbar_icon_cart"}
+            onClick={() => setOpenCart((prev) => !prev)}
+          >
             <ShoppingCartOutlinedIcon />
             <div className={"navbar_icon_cart_number"}>0</div>
           </div>
         </div>
       </div>
+      {openCart && <Cart />}
     </div>
   );
 };

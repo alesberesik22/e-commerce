@@ -13,8 +13,9 @@ const Home = () => {
   return (
     <div className={"home"}>
       <Slider data={data} />
-      <FeaturedProducts />
+      <FeaturedProducts type="trending" />
       <Categoeries />
+      <FeaturedProducts type="featured" />
     </div>
   );
 };

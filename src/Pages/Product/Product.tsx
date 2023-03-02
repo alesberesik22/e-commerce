@@ -7,6 +7,7 @@ import "./Product.scss";
 
 const Product = () => {
   const [number, setNumber] = useState(1);
+  const [image, setImage] = useState("https://picsum.photos/600/800");
   const { id } = useParams();
 
   return (
@@ -16,17 +17,18 @@ const Product = () => {
           <img
             className="product_images_all_img"
             src="https://picsum.photos/600/800"
+            onClick={() => setImage("https://picsum.photos/600/800")}
+            alt="img"
           />
           <img
             className="product_images_all_img"
-            src="https://picsum.photos/600/800"
+            src="https://loremflickr.com/600/800"
+            onClick={() => setImage("https://loremflickr.com/600/800")}
+            alt="img"
           />
         </div>
         <div className="product_images_main">
-          <img
-            className="product_images_main_img"
-            src="https://picsum.photos/600/800"
-          />
+          <img className="product_images_main_img" src={image} />
         </div>
       </div>
       <div className="product_content">
@@ -41,16 +43,16 @@ const Product = () => {
         <div className="product_content_number">
           <div
             className="product_content_number_change"
-            onClick={() => setNumber((prev) => prev + 1)}
+            onClick={() => setNumber((prev) => (prev > 1 ? prev - 1 : prev))}
           >
-            +
+            -
           </div>
           <p>{number}</p>
           <div
             className="product_content_number_change"
-            onClick={() => setNumber((prev) => (prev > 1 ? prev - 1 : prev))}
+            onClick={() => setNumber((prev) => prev + 1)}
           >
-            -
+            +
           </div>
         </div>
         <button className="product_content_cart">
@@ -66,6 +68,18 @@ const Product = () => {
             <CompareArrowsIcon />
             ADD TO COMPARE
           </button>
+        </div>
+        <div className="info">
+          <span>Vendor: Polo</span>
+          <span>Product Type: T-Shirt</span>
+          <span>Tag: T-Shirt, Women, Top</span>
+        </div>
+        <div className="details">
+          <span>DESCRIPTION</span>
+          <hr />
+          <span>ADDITIONAL INFORMATION</span>
+          <hr />
+          <span>FAQ</span>
         </div>
       </div>
     </div>
