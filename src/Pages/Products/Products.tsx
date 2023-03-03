@@ -5,27 +5,41 @@ import Radio from "@mui/material/Radio/Radio";
 import RadioGroup from "@mui/material/RadioGroup/RadioGroup";
 import Slider from "@mui/material/Slider/Slider";
 import { useQueryClient } from "@tanstack/react-query";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import useFetch from "../../api/hooks/useFetch";
+import useCategories from "../../hooks/useCategories";
+import useRange from "../../hooks/useRange";
+import useSort from "../../hooks/useSort";
 import ProductList from "./ProductList/ProductList";
 import "./Products.scss";
 
 const Products = () => {
   const { id } = useParams();
   const [maxPrice, setMaxPrice] = useState<number>(100);
-  const [sort, setSort] = useState<string>();
+  const [sort, setSort] = useState<string>("");
   const [categories, setCategories] = useState<string[]>([]);
   const queryClient = useQueryClient();
-  const { fetchData, fetchError, loading } = useFetch(
-    `/sub-categories?[filters][categories][id][$eq]=${id}`
-  );
+  //categories
+  const {
+    fetchData: categoriesData,
+    fetchError: categoriesError,
+    loading: categoriesLoading,
+  } = useFetch(`/sub-categories?[filters][categories][id][$eq]=${id}`);
+  //products
+  const {
+    fetchData: productsData,
+    fetchError: productsError,
+    loading: productsLoading,
+  } = useFetch(`/products?populate=*&[filters][categories][id]=${id}`);
 
   const handleChange = (event: Event, value: number | number[]) => {
     setMaxPrice(value as number);
   };
-
-  useEffect(() => {}, [categories]);
+  //custom hooks
+  const productsFiltered = useCategories(productsData, categories);
+  const sortedProducts = useSort(productsFiltered, sort);
+  const rangeProducts = useRange(sortedProducts, maxPrice);
 
   return (
     <div className="products">
@@ -33,8 +47,8 @@ const Products = () => {
         <div className="product_filter_categories">
           <h3>Product categories</h3>
           <>
-            {fetchData &&
-              fetchData.map((category) => (
+            {categoriesData &&
+              categoriesData.map((category) => (
                 <div
                   className="product_filter_categories_item"
                   key={category.id}
@@ -45,7 +59,6 @@ const Products = () => {
                     checked={categories.includes(category.attributes.title)}
                     value={category.attributes.title}
                     onChange={(e) => {
-                      console.log(e.target.value);
                       setCategories((prev) =>
                         prev.includes(e.target.value)
                           ? prev.filter((item) => item !== e.target.value)
@@ -105,7 +118,7 @@ const Products = () => {
           src="https://images.pexels.com/photos/1074535/pexels-photo-1074535.jpeg?auto=compress&cs=tinysrgb&w=1600"
           alt="img"
         />
-        {fetchData && <ProductList data={fetchData} />}
+        {rangeProducts && <ProductList data={rangeProducts} />}
       </div>
     </div>
   );

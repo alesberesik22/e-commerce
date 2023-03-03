@@ -1,8 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import useFetch from "../../api/hooks/useFetch";
 import "./Categories.scss";
 
 const Categoeries = () => {
+  const {
+    fetchData: categoriesData,
+    fetchError: categoriesError,
+    loading: categoriesLoading,
+  } = useFetch(`/categories?populate=*`);
+  console.log(categoriesData);
   return (
     <div className="categories">
       <div className="column">
@@ -11,7 +18,7 @@ const Categoeries = () => {
             src="https://images.pexels.com/photos/818992/pexels-photo-818992.jpeg?auto=compress&cs=tinysrgb&w=1600"
             alt=""
           />
-          <Link className="link" to="/products/1">
+          <Link className="link" to="/products/3">
             Sale
           </Link>
         </div>
@@ -30,7 +37,7 @@ const Categoeries = () => {
           src="https://images.pexels.com/photos/1813947/pexels-photo-1813947.jpeg?auto=compress&cs=tinysrgb&w=1600"
           alt=""
         />
-        <Link to="/products/1" className="link">
+        <Link to="/products/5" className="link">
           New Season
         </Link>
       </div>
@@ -41,7 +48,7 @@ const Categoeries = () => {
               src="https://images.pexels.com/photos/1192609/pexels-photo-1192609.jpeg?auto=compress&cs=tinysrgb&w=1600"
               alt=""
             />
-            <Link to="/products/1" className="link">
+            <Link to="/products/2" className="link">
               Men
             </Link>
           </div>
@@ -50,7 +57,7 @@ const Categoeries = () => {
               src="https://images.pexels.com/photos/2703202/pexels-photo-2703202.jpeg?auto=compress&cs=tinysrgb&w=1600"
               alt=""
             />
-            <Link to="/products/1" className="link">
+            <Link to="/products/6" className="link">
               Accessories
             </Link>
           </div>
@@ -60,7 +67,7 @@ const Categoeries = () => {
             src="https://images.pexels.com/photos/1159670/pexels-photo-1159670.jpeg?auto=compress&cs=tinysrgb&w=1600"
             alt=""
           />
-          <Link to="/products/1" className="link">
+          <Link to="/products/4" className="link">
             Shoes
           </Link>
         </div>

@@ -10,12 +10,10 @@ interface Props {
 }
 
 const FeaturedProducts: React.FC<Props> = ({ type }) => {
-  console.log(type);
   const queryClient = useQueryClient();
   const { fetchData, fetchError, loading } = useFetch(
     `/products?populate=*&[filters][type][$eq]=${type}`
   );
-  console.log(fetchData);
 
   return (
     <div className={"featured_products"}>

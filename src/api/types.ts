@@ -9,10 +9,20 @@ export interface IProductsAttributes {
   title: string;
   type: string;
   updatedAt: string;
+  categories: ICategorries;
 }
 export interface IProduct {
   id: number;
   attributes: IProductsAttributes;
+}
+export interface ICategorry {
+  data: {
+    attributes: {
+      title: string;
+      description: string;
+    };
+    id: number;
+  };
 }
 
 export interface Iimage {
@@ -24,3 +34,4 @@ export interface Iimage {
 }
 
 export type IProducts = IProduct[];
+export type ICategorries = ICategorry[];

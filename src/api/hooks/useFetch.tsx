@@ -12,10 +12,9 @@ const useFetch = (url: string) => {
     () => fetchFeaturedProducts(url),
     {
       retry: false,
-      refetchOnWindowFocus: true,
+      refetchOnWindowFocus: false,
     }
   );
-
   useEffect(() => {
     if (isLoading) {
       setLoading(true);
