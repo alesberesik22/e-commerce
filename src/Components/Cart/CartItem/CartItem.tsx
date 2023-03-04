@@ -1,14 +1,19 @@
 import React from "react";
 import "./CartItem.scss";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
+import { useDispatch } from "react-redux";
+import { removeItem } from "../../../redux/cartReducer";
 
 interface CartItemProps {
   img: string;
   price: number;
   title: string;
+  quantity: number;
+  id: number;
 }
 
 const CartItem: React.FC<CartItemProps> = (data) => {
+  const dispatch = useDispatch();
   return (
     <div className="cart_item">
       <div className="cart_body_image">
@@ -23,11 +28,14 @@ const CartItem: React.FC<CartItemProps> = (data) => {
               nesciunt nulla inventore
             </p>
             <span>
-              {"1x "}
+              {data.quantity + "x "}
               {data.price} {" $"}
             </span>
           </div>
-          <DeleteOutlineIcon className="delete_outline_content" />
+          <DeleteOutlineIcon
+            className="delete_outline_content"
+            onClick={() => dispatch(removeItem(data.id))}
+          />
         </div>
       </div>
     </div>

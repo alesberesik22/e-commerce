@@ -1,9 +1,25 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./Cart.scss";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import CartItem from "./CartItem/CartItem";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../redux/store";
+import { ReduxStoreProducts, resetCart } from "../../redux/cartReducer";
 
 const Cart = () => {
+  const products = useSelector((state: RootState) => state.cart.products);
+  const [total, setTotal] = useState<number>(0);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    setTotal(
+      products.reduce(
+        (total, product: any) => total + product.price * product.quantity,
+        0
+      )
+    );
+  }, [products]);
+
   const data = {
     id: 1,
     img: "https://picsum.photos/250/400",
@@ -18,17 +34,28 @@ const Cart = () => {
       <h3>Products in your cart</h3>
       <div className="cart_body">
         <div className="cart_card">
-          <CartItem img={data.img} price={data.price} title={data.title} />
+          {products &&
+            products.map((product: any) => (
+              <CartItem
+                img={`http://localhost:1337${product.img}`}
+                price={product.price}
+                title={product.title}
+                quantity={product.quantity}
+                id={product.id}
+              />
+            ))}
           <div className="cart_total">
             <div>SUBTOTAL</div>
             <div>
-              {data.price} {" $"}
+              {total} {" $"}
             </div>
           </div>
           <button className="checkout" type="button">
             PROCEED TO CHECKOUT
           </button>
-          <div className="resetCart">Reset cart</div>
+          <div className="resetCart" onClick={() => dispatch(resetCart())}>
+            Reset cart
+          </div>
         </div>
       </div>
     </div>

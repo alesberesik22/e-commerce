@@ -14,6 +14,7 @@ export interface IProductsAttributes {
 export interface IProduct {
   id: number;
   attributes: IProductsAttributes;
+  quantity?: number;
 }
 export interface ICategorry {
   data: {

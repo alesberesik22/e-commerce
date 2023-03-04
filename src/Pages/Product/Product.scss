@@ -30,12 +30,13 @@
           box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
         }
       }
-      .product_images_main {
-        width: 90%;
-        .product_images_main_img {
-          width: 100%;
-          aspect-ratio: 1/1;
-        }
+    }
+    .product_images_main {
+      width: 90%;
+      .product_images_main_img {
+        width: 100%;
+        aspect-ratio: auto;
+        object-fit: cover;
       }
     }
   }

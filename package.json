@@ -14,6 +14,7 @@
     "@emotion/styled": "^11.10.6",
     "@mui/icons-material": "^5.11.9",
     "@mui/material": "^5.11.10",
+    "@reduxjs/toolkit": "^1.9.3",
     "@tanstack/react-query": "^4.24.10",
     "@tanstack/react-query-devtools": "^4.24.12",
     "@types/node-sass": "^4.11.3",
@@ -23,6 +24,7 @@
     "orval": "^6.12.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-redux": "^8.0.5",
     "react-router-dom": "^6.8.1",
     "sass": "^1.58.3"
   },
