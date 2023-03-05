@@ -7,7 +7,7 @@ import { RootState } from "../../redux/store";
 import { ReduxStoreProducts, resetCart } from "../../redux/cartReducer";
 
 const Cart = () => {
-  const products = useSelector((state: RootState) => state.cart.products);
+  const products = useSelector((state: RootState) => state.products);
   const [total, setTotal] = useState<number>(0);
   const dispatch = useDispatch();
 
@@ -42,6 +42,7 @@ const Cart = () => {
                 title={product.title}
                 quantity={product.quantity}
                 id={product.id}
+                key={product.id}
               />
             ))}
           <div className="cart_total">
